@@ -1,5 +1,5 @@
 {
-    "name": "mouf/utils.session",
+    "name": "mouf/utils.basicsession",
     "description": "This package contains the session interface implementation",
     "keywords": ["mouf", "session", "sessioninterface", "php", "php session"],
     "homepage": "https://github.com/Ngob/utils.session",
@@ -21,11 +21,11 @@
     "require": {
         "php": ">=5.3.0",
         "mouf/utils.session.session-manager": "~2.1",
-	"thecodingmachine/sessioninterface": "1.0.x-dev"
+		"thecodingmachine/sessioninterface": "1.0.x-dev"
     },
     "autoload": {
         "psr-4": {
-            "TheCodingMachine\\Utils\\Session\\": "src/"
+            "Mouf\\Utils\\BasicSession\\": "src/"
         }
     }
 }
