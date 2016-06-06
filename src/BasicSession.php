@@ -1,6 +1,6 @@
 <?php
 
-namespace Mouf\Utils\BasicSession;
+namespace Interop\Session\Utils\BasicSession;
 
 use Interop\Session\SessionInterface;
 

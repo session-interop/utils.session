@@ -1,7 +1,7 @@
 {
     "name": "session-interop/utils.basicsession",
     "description": "This package contains the session interface implementation",
-    "keywords": ["mouf", "session", "sessioninterface", "php", "php session"],
+    "keywords": ["session", "sessioninterface", "php", "php session"],
     "homepage": "https://github.com/session-interop/utils.session",
     "type": "library",
     "license": "MIT",
@@ -18,7 +18,7 @@
     },
     "autoload": {
         "psr-4": {
-            "Mouf\\Utils\\BasicSession\\": "src/"
+            "Interop\\Session\\Utils\\BasicSession\\": "src/"
         }
     }
 }
