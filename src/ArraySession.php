@@ -3,7 +3,7 @@
 namespace Interop\Session\Utils\ArraySession;
 
 use Interop\Session\SessionInterface;
-
+use Interop\Session\Utils\ArraySession\Exception\SessionException;
 
 class ArraySession implements SessionInterface {
 
