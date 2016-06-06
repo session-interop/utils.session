@@ -1,8 +1,8 @@
 {
-    "name": "mouf/utils.basicsession",
+    "name": "session-interop/utils.basicsession",
     "description": "This package contains the session interface implementation",
     "keywords": ["mouf", "session", "sessioninterface", "php", "php session"],
-    "homepage": "https://github.com/Ngob/utils.session",
+    "homepage": "https://github.com/session-interop/utils.session",
     "type": "library",
     "license": "MIT",
     "authors": [
@@ -10,12 +10,6 @@
             "name": "Benoit Ngo",
             "email": "b.ngo@thecodingmachine.com",
             "homepage": "http://mouf-php.com"
-        }
-    ],
-    "repositories": [
-        {
-            "type": "vcs",
-            "url": "git@github.com:Ngob/session-interop.git"
         }
     ],
     "require": {
