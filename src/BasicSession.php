@@ -2,56 +2,54 @@
 
 namespace Mouf\Utils\BasicSession;
 
-use TheCodingMachine\SessionInterface\SessionInterface;
+use Interop\Session\SessionInterface;
 
 
 class BasicSession implements SessionInterface {
-	
+
 	private $storage;
-	
-	private $prefix;	
-	
+
+	private $prefix;
+
 	public function __construct($storage, $prefix = "") {
 		$this->storage = $storage;
 		$this->prefix = $prefix;
-	}
-	
-	public function set($key, $data) {
-		if (!$this->storage) {
-			throw new SessionException("No storage detected");
+		if (!is_array($this->storage)) {
+			throw new SessionException("Storage must be an array, "
+					.(gettype($this->storage) === "object" ? get_class($this->storage) : gettype($this->storage))
+					." given"
+			);
 		}
-		
+	}
+
+	public function set($key, $data) {
 		if (!is_string($key)) {
 			throw new SessionException("Key must be a string");
 		}
-		
-		if (!$this->has($key)) {
-			throw new SessionException("Key is not in session");
-		}
-		
 		$this->storage[$this->prefix.$key] = $data;
 	}
-	
+
 	public function get($key) {
-		if (!$this->storage) {
-			throw new SessionException("No storage detected");
-		}
-		
 		if (!is_string($key)) {
 			throw new SessionException("Key must be a string");
 		}
 		return $this->storage[$this->prefix.$key];
 	}
-	
+
 	public function has($key) {
-		if (!$this->storage) {
-			throw new SessionException("No storage detected");
-		}
-		
 		if (!is_string($key)) {
 			throw new SessionException("Key must be a string");
 		}
 		return isset($this->storage[$this->prefix.$key]);
 	}
-	
+
+	public function remove($key) {
+		if (!is_string($key)) {
+			throw new SessionException("Key must be a string");
+		}
+		if ($this->has($key)) {
+			unset($this->storage[$key]);
+		}
+	}
+
 }
