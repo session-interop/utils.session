@@ -1,5 +1,5 @@
 {
-    "name": "session-interop/utils.basicsession",
+    "name": "session-interop/utils.arraysession",
     "description": "This package contains the session interface implementation",
     "keywords": ["session", "sessioninterface", "php", "php session"],
     "homepage": "https://github.com/session-interop/utils.session",
@@ -18,7 +18,7 @@
     },
     "autoload": {
         "psr-4": {
-            "Interop\\Session\\Utils\\BasicSession\\": "src/"
+            "Interop\\Session\\Utils\\ArraySession\\": "src/"
         }
     }
 }

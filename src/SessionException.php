@@ -1,6 +1,6 @@
 <?php
 
-namespace Interop\Session\Utils\BasicSession\Exception;
+namespace Interop\Session\Utils\ArraySession\Exception;
 
 class SessionException extends \Exception {
 	

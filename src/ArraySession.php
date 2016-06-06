@@ -1,11 +1,11 @@
 <?php
 
-namespace Interop\Session\Utils\BasicSession;
+namespace Interop\Session\Utils\ArraySession;
 
 use Interop\Session\SessionInterface;
 
 
-class BasicSession implements SessionInterface {
+class ArraySession implements SessionInterface {
 
 	private $storage;
 
