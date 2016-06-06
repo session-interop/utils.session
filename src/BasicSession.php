@@ -11,7 +11,7 @@ class BasicSession implements SessionInterface {
 
 	private $prefix;
 
-	public function __construct($storage, $prefix = "") {
+	public function __construct(&$storage, $prefix = "") {
 		$this->storage = $storage;
 		$this->prefix = $prefix;
 		if (!is_array($this->storage)) {
