@@ -1,0 +1,48 @@
+<?php
+
+namespace Interop\Session\Utils\ArraySession\TestCase;
+use Interop\Session\Utils\ArraySession\ArraySession;
+
+class ArraySessionSetterTest extends \PHPUnit_Framework_TestCase {
+
+    protected function getMockSession(&$array, $prefix = "") {
+      return $this->getMockBuilder('Interop\Session\Utils\ArraySession\ArraySession')
+        ->setConstructorArgs(array(&$array, $prefix))
+          ->setMethods(null)
+          ->getMock();
+    }
+
+
+  /**
+  * @dataProvider provideValues
+  */
+  public function testSetter($array, $key, $val, $prefix) {
+    $session = $this->getMockSession($array, $prefix);
+
+      $session->set($key, $val);
+      $this->assertEquals($val, $array[$prefix.$key]);
+  }
+
+  /**
+  * @dataProvider provideValues
+  * @expectedException Interop\Session\Utils\ArraySession\Exception\SessionException
+  */
+  public function testSetterIsString($array, $key, $val, $prefix) {
+    $session = $this->getMockSession($array, $prefix);
+
+      $session->set(array($key), $val);
+  }
+
+
+  public function provideValues() {
+    $a1 = [];
+
+    return [
+      [$a1, "oiseau", "baz", "prefix"],
+      [$a1, "foo", null, null],
+      [$a1, "foo", "baz", "foo"],
+      [$a1, "foo", "baz", "baz"],
+    ];
+  }
+
+}

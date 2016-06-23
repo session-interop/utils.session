@@ -12,7 +12,7 @@ class ArraySession implements SessionInterface {
 	private $prefix;
 
 	public function __construct(&$storage, $prefix = "") {
-		$this->storage = $storage;
+		$this->storage = &$storage;
 		$this->prefix = $prefix;
 		if (!is_array($this->storage)) {
 			throw new SessionException("Storage must be an array, "
@@ -22,16 +22,14 @@ class ArraySession implements SessionInterface {
 		}
 	}
 
-	public function set($key, $data) {
+	public function get($key) {
+
 		if (!is_string($key)) {
 			throw new SessionException("Key must be a string");
 		}
-		$this->storage[$this->prefix.$key] = $data;
-	}
 
-	public function get($key) {
-		if (!is_string($key)) {
-			throw new SessionException("Key must be a string");
+		if (!$this->has($key)) {
+			return null;
 		}
 		return $this->storage[$this->prefix.$key];
 	}
@@ -40,8 +38,17 @@ class ArraySession implements SessionInterface {
 		if (!is_string($key)) {
 			throw new SessionException("Key must be a string");
 		}
-		return isset($this->storage[$this->prefix.$key]);
+		return array_key_exists($this->prefix.$key, $this->storage);
 	}
+
+
+	public function set($key, $data) {
+		if (!is_string($key)) {
+			throw new SessionException("Key must be a string");
+		}
+		$this->storage[$this->prefix.$key] = $data;
+	}
+
 
 	public function remove($key) {
 		if (!is_string($key)) {
