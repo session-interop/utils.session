@@ -1,5 +1,5 @@
-[![Build Status](https://travis-ci.org/session-interop/session-interop.svg?branch=master)](https://travis-ci.org/session-interop/session-interop)
-[![Coverage Status](https://coveralls.io/repos/session-interop/session-interop/badge.svg?branch=master&service=github)](https://coveralls.io/github/session-interop/session-interop?branch=master)
+[![Build Status](https://travis-ci.org/session-interop/utils.session.svg?branch=master)](https://travis-ci.org/session-interop/utils.session)
+[![Coverage Status](https://coveralls.io/repos/session-interop/utils.session/badge.svg?branch=master&service=github)](https://coveralls.io/github/session-interop/utils.session?branch=master)
 
 # Array Session
 
