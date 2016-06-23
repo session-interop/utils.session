@@ -30,6 +30,7 @@ class ArraySessionGetterTest extends \PHPUnit_Framework_TestCase {
 
     /**
     * @dataProvider provideValues
+    * @expectedException Interop\Session\Utils\ArraySession\Exception\SessionException
     */
     public function testGetterNoValue($array, $key, $val, $prefix) {
 
@@ -38,7 +39,7 @@ class ArraySessionGetterTest extends \PHPUnit_Framework_TestCase {
       ->method('has')
       ->with($this->equalTo($key))
       ->willReturn(false);
-      $this->assertEquals(null, $session->get($key));
+      $session->get($key);
     }
 
     /**

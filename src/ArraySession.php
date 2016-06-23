@@ -29,7 +29,7 @@ class ArraySession implements SessionInterface {
 		}
 
 		if (!$this->has($key)) {
-			return null;
+				throw new SessionException("No value with key ".$key);
 		}
 		return $this->storage[$this->prefix.$key];
 	}
