@@ -36,12 +36,14 @@ class ArraySessionSetterTest extends \PHPUnit_Framework_TestCase {
 
   public function provideValues() {
     $a1 = [];
-
+    if (!isset($_SESSION)) {
+      session_start();
+		}
     return [
       [$a1, "oiseau", "baz", "prefix"],
       [$a1, "foo", null, null],
       [$a1, "foo", "baz", "foo"],
-      [$a1, "foo", "baz", "baz"],
+      [$_SESSION, "foo", "baz", "baz"],
     ];
   }
 

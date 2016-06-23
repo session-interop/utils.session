@@ -31,12 +31,14 @@ class ArraySessionHasTest extends \PHPUnit_Framework_TestCase {
 
   public function provideValues() {
     $a1 = [];
-
+    if (!isset($_SESSION)) {
+      session_start();
+		}
     return [
       [$a1, "nurf", "xorf", "prefix"],
       [$a1, "Ping", null, null],
       [$a1, "Pong", "doe", "john"],
-      [$a1, "Carburant", "Voix", "Mexicain"],
+      [$_SESSION, "Carburant", "Voix", "Mexicain"],
     ];
   }
 

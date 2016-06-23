@@ -57,14 +57,14 @@ class ArraySessionGetterTest extends \PHPUnit_Framework_TestCase {
 
   public function provideValues() {
     $a1 = [];
-    /**$session = $this->getMockBuilder('Interop\Session\Utils\ArraySession\ArraySession')
-      ->setConstructorArgs(array(&$a1));**/
-
+    if (!isset($_SESSION)) {
+      session_start();
+		}
     return [
       [$a1, "bim", "bam", "boumx"],
       [$a1, "ping", null, null],
       [$a1, "tic", "tac", "toc"],
-      [$a1, "bird", "eat", "seed"],
+      [$_SESSION, "bird", "eat", "seed"],
     ];
   }
 

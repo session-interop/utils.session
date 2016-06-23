@@ -58,12 +58,14 @@ class ArraySessionRemoveTest extends \PHPUnit_Framework_TestCase {
 
   public function provideValues() {
     $a1 = [];
-
+    if (!isset($_SESSION)) {
+      session_start();
+		}
     return [
       [$a1, "JOhnny", "Raiel", "Dui"],
       [$a1, "foo", null, null],
       [$a1, "汉字", "汉字", "汉字"],
-      [$a1, "ألف", "ألف", "ألف"],
+      [$_SESSION, "ألف", "ألف", "ألف"],
     ];
   }
 
