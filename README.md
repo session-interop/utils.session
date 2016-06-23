@@ -14,10 +14,37 @@ The packages adheres to the [SemVer](http://semver.org/) specification, and ther
 ### Available
 
 [`SessionArray`](src/ArraySession.php).
+
 The implementation of SessionInterface.
 
+#### Methods
+
+##### `__construct(&$array, $prefix = "")`
+
+Construct the object. The object will use $array to store element. It use a reference on $array, so $array will be modified when you use `set($key)`and `remove($key)`.
+If prefix is given, it will automatically prefix all `$key`.
+
+##### `has($key)`
+
+Verify is the key `$key` exists into the array injected at the object construction. Throw an exception if the `key` is not a string. if the associated value is `null`, the method return `true`.
+
+##### `get($key)`
+
+Get the value associated with `$key`. Throw an exception if no key are found or if the key is not a string   
+
+##### `set($key, $val)`
+
+Set the value `$val` at the key `$key`. Throw an exception if the key is not a string.
+
+##### `remove($key)`
+
+Destroy the element at `$key`
+
 [`SessionException`](src/Exception/SessionException.php).
-Exception used on error.
+
+Exception used on error. Throw an exception if the key is not a string
+
+
 
 ### Usage
 
@@ -52,6 +79,7 @@ class UserService {
 ```
 
 Use the implementation:
+
 Index.php
 ```php
 use Interop\Session\Utils\ArraySession\ArraySession;
@@ -75,5 +103,3 @@ else {
   $userService->login($session, $userId);
 }
 ```
-
-This way, the user service does not rely on a specific implementation, so you can use any session object that implements SessionInterface.
