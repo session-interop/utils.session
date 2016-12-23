@@ -25,6 +25,16 @@ class ArraySessionSetterTest extends \PHPUnit_Framework_TestCase {
 
   /**
   * @dataProvider provideValues
+  */
+  public function testSetterNoValue($array, $key, $val, $prefix) {
+    $session = $this->getMockSession($array, $prefix);
+
+      $session->set($key, null);
+      $this->assertEquals(null, $array[$prefix.$key]);
+  }
+
+  /**
+  * @dataProvider provideValues
   * @expectedException Interop\Session\Utils\ArraySession\Exception\SessionException
   */
   public function testSetterIsString($array, $key, $val, $prefix) {

@@ -21,25 +21,24 @@ class ArraySessionGetterTest extends \PHPUnit_Framework_TestCase {
         $array[$keyWithPrefix] = $val;
         //$session->get($key)->willReturn($val);
         $session = $this->getMockSession($array, $prefix);
-        $session->expects($this->once())
-        ->method('has')
-        ->with($this->equalTo($key))
-        ->willReturn(true);
+        //$session->expects($this->once())
+        //->method('has')
+        //->with($this->equalTo($key))
+        //->willReturn(true);
         $this->assertEquals($val, $session->get($key));
     }
 
     /**
     * @dataProvider provideValues
-    * @expectedException Interop\Session\Utils\ArraySession\Exception\SessionException
     */
     public function testGetterNoValue($array, $key, $val, $prefix) {
 
       $session = $this->getMockSession($array, $prefix);
-      $session->expects($this->once())
-      ->method('has')
-      ->with($this->equalTo($key))
-      ->willReturn(false);
-      $session->get($key);
+      //$session->expects($this->once())
+      //->method('has')
+      //->with($this->equalTo($key))
+      //->willReturn(false);
+      $this->assertEquals(null, $session->get($key));
     }
 
     /**
@@ -48,9 +47,9 @@ class ArraySessionGetterTest extends \PHPUnit_Framework_TestCase {
     */
     public function testGetterKeyIsString($array, $key, $val, $prefix) {
       $session = $this->getMockSession($array, $prefix);
-      $session->expects($this->never())
-        ->method('has')
-        ->with($this->equalTo($key));
+      //$session->expects($this->never())
+        //->method('has')
+        //->with($this->equalTo($key));
       $session->get(array());
     }
 

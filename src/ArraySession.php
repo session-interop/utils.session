@@ -27,14 +27,10 @@ class ArraySession implements SessionInterface {
 		if (!is_string($key)) {
 			throw new SessionException("Key must be a string");
 		}
-
-		if (!$this->has($key)) {
-				throw new SessionException("No value with key ".$key);
-		}
-		return $this->storage[$this->prefix.$key];
+		return $this->has($key) ? $this->storage[$this->prefix.$key] : null;
 	}
 
-	public function has($key) {
+	private function has($key) {
 		if (!is_string($key)) {
 			throw new SessionException("Key must be a string");
 		}
@@ -46,14 +42,14 @@ class ArraySession implements SessionInterface {
 		if (!is_string($key)) {
 			throw new SessionException("Key must be a string");
 		}
+		if ($data === null) {
+			$this->remove($key);
+		}
 		$this->storage[$this->prefix.$key] = $data;
 	}
 
 
-	public function remove($key) {
-		if (!is_string($key)) {
-			throw new SessionException("Key must be a string");
-		}
+	private function remove($key) {
 		if ($this->has($key)) {
 			unset($this->storage[$key]);
 		}
