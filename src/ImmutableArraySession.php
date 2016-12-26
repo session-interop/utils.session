@@ -7,14 +7,14 @@ use Interop\Session\Utils\ArraySession\Exception\SessionException;
 /**
 * This object rely on the default session implementation; so this object IS NOT immutable (it set data directly in $_SESSION)
 **/
-class ArraySession implements SessionInterface {
+class ImmutableArraySession implements SessionInterface {
 
 	private $storage;
 
 	private $prefix;
 
-	public function __construct(&$storage, $prefix = "") {
-		$this->storage = &$storage;
+	public function __construct($storage, $prefix = "") {
+		$this->storage = $storage;
 		$this->prefix = $prefix;
 		if (!is_array($this->storage)) {
 			throw new SessionException("Storage must be an array, "
@@ -29,28 +29,21 @@ class ArraySession implements SessionInterface {
 	}
 
 	private function has(string $key) {
-		if (!is_string($key)) {
-			throw new SessionException("Key must be a string");
-		}
 		return array_key_exists($this->prefix.$key, $this->storage);
 	}
 
-
 	public function with(string $key, ?string $data): SessionInterface {
-		if ($data === null) {
-			$this->remove($key);
+		$cloneActualSession = $this->storage;
+		if ($data !== null) {
+			$cloneActualSession[$key] = $data;
+		}
+		else if ($this->has($key)) {
+			unset($cloneActualSession[$key]);
 		}
 		else {
-			$this->storage[$this->prefix.$key] = $data;
+			return $this;
 		}
-		return new self($this->storage);
-	}
-
-
-	private function remove($key) {
-		if ($this->has($key)) {
-			unset($this->storage[$key]);
-		}
+		return new self($cloneActualSession, $this->prefix);
 	}
 
 }

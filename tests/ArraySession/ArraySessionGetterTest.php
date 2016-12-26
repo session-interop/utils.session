@@ -41,18 +41,6 @@ class ArraySessionGetterTest extends \PHPUnit_Framework_TestCase {
       $this->assertEquals(null, $session->get($key));
     }
 
-    /**
-    * @dataProvider provideValues
-    * @expectedException Interop\Session\Utils\ArraySession\Exception\SessionException
-    */
-    public function testGetterKeyIsString($array, $key, $val, $prefix) {
-      $session = $this->getMockSession($array, $prefix);
-      //$session->expects($this->never())
-        //->method('has')
-        //->with($this->equalTo($key));
-      $session->get(array());
-    }
-
 
   public function provideValues() {
     $a1 = [];

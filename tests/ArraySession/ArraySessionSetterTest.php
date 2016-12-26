@@ -19,8 +19,12 @@ class ArraySessionSetterTest extends \PHPUnit_Framework_TestCase {
   public function testSetter($array, $key, $val, $prefix) {
     $session = $this->getMockSession($array, $prefix);
 
-      $session->set($key, $val);
-      $this->assertEquals($val, $array[$prefix.$key]);
+      $s = $session->with($key, $val);
+      if (!$val) {
+        $this->assertArrayNotHasKey($prefix.$key, $array);
+      } else {
+        $this->assertEquals($val, $array[$prefix.$key]);
+      }
   }
 
   /**
@@ -29,18 +33,8 @@ class ArraySessionSetterTest extends \PHPUnit_Framework_TestCase {
   public function testSetterNoValue($array, $key, $val, $prefix) {
     $session = $this->getMockSession($array, $prefix);
 
-      $session->set($key, null);
-      $this->assertEquals(null, $array[$prefix.$key]);
-  }
-
-  /**
-  * @dataProvider provideValues
-  * @expectedException Interop\Session\Utils\ArraySession\Exception\SessionException
-  */
-  public function testSetterIsString($array, $key, $val, $prefix) {
-    $session = $this->getMockSession($array, $prefix);
-
-      $session->set(array($key), $val);
+      $session->with($key, null);
+      $this->assertArrayNotHasKey($prefix.$key, $array);
   }
 
 
