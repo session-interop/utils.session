@@ -9,9 +9,9 @@ use Interop\Session\Utils\ArraySession\Exception\SessionException;
 **/
 class ArraySession implements SessionInterface {
 
-	private $storage;
+	protected $storage;
 
-	private $prefix;
+	protected $prefix;
 
 	public function __construct(&$storage, $prefix = "") {
 		$this->storage = &$storage;
