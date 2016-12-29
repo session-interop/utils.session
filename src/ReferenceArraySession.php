@@ -8,14 +8,14 @@ use Interop\Session\Utils\ArraySession\Exception\SessionException;
 * This object rely on the default session implementation; so this object IS NOT immutable (it set data directly in $_SESSION)
 * This object modify the $storage
 **/
-class ArraySession implements SessionInterface {
+class ReferenceArraySession implements SessionInterface {
 
 	protected $storage;
 
 	protected $prefix;
 
-	public function __construct($storage, $prefix = "") {
-		$this->storage = $storage;
+	public function __construct(&$storage, $prefix = "") {
+		$this->storage = &$storage;
 		$this->prefix = $prefix;
 	}
 
