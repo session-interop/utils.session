@@ -19,21 +19,21 @@ class ArraySession implements SessionInterface {
 		$this->prefix = $prefix;
 	}
 
-	protected function key(string $k): string {
+	protected function getKey(string $k): string {
 		return $this->prefix.$k;
 	}
 
 	public function get(string $key): ?string {
-		return $this->has($key) ? $this->storage[$this->key($key)] : null;
+		return $this->has($key) ? $this->storage[$this->getKey($key)] : null;
 	}
 
 
 	public function set(string $key, ?string $data): void {
-		$this->storage[$this->key($key)] = $data;
+		$this->storage[$this->getKey($key)] = $data;
 	}
 
 	private function has(string $key) {
-		return array_key_exists($this->key($key), $this->storage);
+		return array_key_exists($this->getKey($key), $this->storage);
 	}
 
 
