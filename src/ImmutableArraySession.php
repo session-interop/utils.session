@@ -13,16 +13,15 @@ class ImmutableArraySession implements SessionInterface {
 
 	protected $prefix;
 
-	public function __construct($storage, $prefix = "") {
+	public function __construct(array $storage, string $prefix = "") {
 		$this->storage = $storage;
 		$this->prefix = $prefix;
-		if (!is_array($this->storage)) {
-			throw new SessionException("Storage must be an array, "
-					.(gettype($this->storage) === "object" ? get_class($this->storage) : gettype($this->storage))
-					." given"
-			);
-		}
 	}
+
+	protected function key(string $k): string {
+		return $this->prefix.$k;
+	}
+
 
 	public function get(string $key): ?string {
 		return $this->has($key) ? $this->storage[$this->prefix.$key] : null;
@@ -34,15 +33,7 @@ class ImmutableArraySession implements SessionInterface {
 
 	public function with(string $key, ?string $data): SessionInterface {
 		$cloneActualSession = $this->storage;
-		if ($data !== null) {
-			$cloneActualSession[$key] = $data;
-		}
-		else if ($this->has($key)) {
-			unset($cloneActualSession[$key]);
-		}
-		else {
-			return $this;
-		}
+		$cloneActualSession[$this->key($key)] = $data;
 		return new self($cloneActualSession, $this->prefix);
 	}
 
